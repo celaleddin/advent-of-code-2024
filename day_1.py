@@ -1,6 +1,6 @@
 def read_location_lists() -> tuple[list[int], list[int]]:
     with open('./inputs/day_1.txt') as f:
-        lines = f.readlines()
+        lines = [line.rstrip() for line in f]
     left = []
     right = []
     for line in lines:

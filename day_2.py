@@ -1,6 +1,6 @@
 def read_reports() -> list[list[int]]:
     with open('./inputs/day_2.txt') as f:
-        reports_data = f.readlines()
+        reports_data = [line.rstrip() for line in f]
     return [
         [int(level) for level in report_data.split()]
         for report_data in reports_data
@@ -32,7 +32,7 @@ def is_report_safe_under_problem_dampener(report: list[int]) -> bool:
     )
 
 def count_safe_reports(report_safety_fun):
-    return sum(1 if report_safety_fun(report) else 0 for report in reports)
+    return sum(1 for report in reports if report_safety_fun(report))
 
 def solve_part_1(reports: list[list[int]]) -> int:
     return count_safe_reports(is_report_safe)

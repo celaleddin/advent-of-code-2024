@@ -2,7 +2,7 @@ import re
 
 def read_program_lines() -> list[str]:
     with open('./inputs/day_3.txt') as f:
-        return f.readlines()
+        return [line.rstrip() for line in f]
 
 def find_instructions(program: list[str]):
     pattern = re.compile(r"mul\(\d{1,3},\d{1,3}\)|don't|do")
@@ -23,9 +23,8 @@ def execute_mul_instruction(instruction: str):
 def solve_part_1(instructions: list[str]) -> int:
     return sum(
         execute_mul_instruction(instruction)
-        if is_mul_instruction(instruction)
-        else 0
         for instruction in instructions
+        if is_mul_instruction(instruction)
     )
 
 def solve_part_2(instructions: list[str]) -> int:
