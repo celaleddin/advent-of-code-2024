@@ -30,14 +30,13 @@ def find_antinode_positions(
         antennas: list[Antenna],
         frequency: str,
         check_limits: Callable,
-        until_limits,
-        include_antenna_positions,
+        include_harmonics: bool,
 ) -> list[Position]:
     antinode_positions = []
 
     def get_antinodes_in_direction(initial, vector):
         candidate = initial[0] + vector[0], initial[1] + vector[1]
-        if check_limits(candidate) and not until_limits:
+        if check_limits(candidate) and not include_harmonics:
             return [candidate]
         elif check_limits(candidate):
             return [candidate, *get_antinodes_in_direction(candidate, vector)]
@@ -46,7 +45,7 @@ def find_antinode_positions(
     for antenna1, antenna2 in product(antennas[frequency], repeat=2):
         a, b = antenna1.position, antenna2.position
         if a == b:
-            if include_antenna_positions:
+            if include_harmonics:
                 antinode_positions.append(a)
             continue
 
@@ -68,9 +67,7 @@ def count_unique_antinodes(antennas: list[Antenna], map_size: MapSize, include_h
         position
         for frequency in antennas.keys()
         for position in find_antinode_positions(
-                antennas, frequency, check_limits,
-                until_limits=include_harmonics,
-                include_antenna_positions=include_harmonics,
+                antennas, frequency, check_limits, include_harmonics,
         )
     ]
     return len(Counter(antinode_positions_in_map))
