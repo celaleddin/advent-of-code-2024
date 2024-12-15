@@ -1,5 +1,5 @@
 def read_reports() -> list[list[int]]:
-    with open('./inputs/day_2.txt') as f:
+    with open('./inputs/day_02.txt') as f:
         reports_data = [line.rstrip() for line in f]
     return [
         [int(level) for level in report_data.split()]

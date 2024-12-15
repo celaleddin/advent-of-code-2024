@@ -14,7 +14,7 @@ Antenna = NamedTuple('Antenna', [
 
 def read_antennas_and_map_size() -> tuple[list[Antenna], MapSize]:
     antennas = defaultdict(list)
-    with open('./inputs/day_8.txt') as f:
+    with open('./inputs/day_08.txt') as f:
         lines = f.readlines()
         row_count = len(lines)
         col_count = len(lines[0].rstrip())

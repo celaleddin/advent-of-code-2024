@@ -4,7 +4,7 @@ type matrix = list[str]
 
 def read_matrix() -> matrix:
     "Each string in the list is a row, each character in the string is a column"
-    with open('./inputs/day_4.txt') as f:
+    with open('./inputs/day_04.txt') as f:
         return [line.rstrip() for line in f]
 
 def get_horizontals(matrix: matrix) -> list[str]:

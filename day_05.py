@@ -8,7 +8,7 @@ def read_raw_rules_and_updates() -> tuple[list[str], list[str]]:
     rules = []
     updates = []
     reading_rules = True
-    with open('./inputs/day_5.txt') as f:
+    with open('./inputs/day_05.txt') as f:
         for line in f:
             entry = line.rstrip()
             if entry == '':

@@ -11,7 +11,7 @@ type Operator = Callable[[int, int], int]
 
 def read_equations() -> list[Equation]:
     equations = []
-    with open('./inputs/day_7.txt') as f:
+    with open('./inputs/day_07.txt') as f:
         for line in f:
             value_str, numbers_str = line.split(':')
             numbers = [int(n) for n in numbers_str.strip().split(' ')]

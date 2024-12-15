@@ -6,7 +6,7 @@ Block = NamedTuple('Block', [
 ])
 
 def read_disk_map() -> list[Block]:
-    with open('./inputs/day_9.txt') as f:
+    with open('./inputs/day_09.txt') as f:
         blocks = []
         file_id = 0
         block_definitions = f.readline().rstrip()

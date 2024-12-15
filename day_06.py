@@ -10,7 +10,7 @@ LEFT = '<'
 OBSTACLE = '#'
 
 def read_map() -> map:
-    with open('./inputs/day_6.txt') as f:
+    with open('./inputs/day_06.txt') as f:
         return [line.rstrip() for line in f]
 
 # `p` is `position` and `t` is `times: int` below

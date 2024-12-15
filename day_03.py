@@ -1,7 +1,7 @@
 import re
 
 def read_program_lines() -> list[str]:
-    with open('./inputs/day_3.txt') as f:
+    with open('./inputs/day_03.txt') as f:
         return [line.rstrip() for line in f]
 
 def find_instructions(program: list[str]):
