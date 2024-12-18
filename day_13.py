@@ -46,18 +46,47 @@ def get_min_cost(config: Config):
         for j in range(1, 101)
     )
 
-def get_cost_of_as_many_prize_as_possible(configs: list[Config]):
+def get_cost_of_as_many_prizes_as_possible(cost_function, configs: list[Config]):
     total_cost = 0
     for config in configs:
-        cost = get_min_cost(config)
+        cost = cost_function(config)
         if cost != inf:
             total_cost += cost
     return total_cost
 
+def get_min_cost_by_solving_equations(config: Config):
+    # a_x*Times_a + b_x*Times_b = p_x
+    # a_y*Times_a + b_y*Times_b = p_y
+    a_config, b_config, prize_config = config
+    a_x, a_y = a_config
+    b_x, b_y = b_config
+    p_x, p_y = prize_config
+    # p_x*b_y - p_y*b_x = Times_a*(a_x*b_y - a_y*b_x)
+    try:
+        times_a = (p_x*b_y - p_y*b_x) / (a_x*b_y - a_y*b_x)
+        times_b = (p_x - a_x*times_a) / b_x
+        if times_a == int(times_a) and times_b == int(times_b):
+            return int(times_a*A_PRICE + times_b*B_PRICE)
+        return inf
+    except:
+        return inf
+
 def solve_part_1(configs: list[Config]):
-    return get_cost_of_as_many_prize_as_possible(configs)
+    return get_cost_of_as_many_prizes_as_possible(get_min_cost, configs)
+
+def solve_part_2(configs: list[Config]):
+    error = 10000000000000
+    config_with_fixed_prize = [
+        (config[0], config[1], (config[2][0]+error, config[2][1]+error))
+        for config in configs
+    ]
+    return get_cost_of_as_many_prizes_as_possible(
+        get_min_cost_by_solving_equations,
+        config_with_fixed_prize,
+    )
 
 if __name__ == '__main__':
     configs = read_configs()
 
     print(f"Answer for part 1: {solve_part_1(configs)}")
+    print(f"Answer for part 2: {solve_part_2(configs)}")
